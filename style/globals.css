@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .icon {
+    @apply p-2 text-blue-700 rounded-full hover:bg-gray-50 cursor-pointer transition-all duration-100;
+  }
+  .icon_text {
+    @apply hover:bg-gray-50 space-x-2 transition-all duration-100 px-5 py-3 cursor-pointer text-sm;
+  }
+  .icons {
+    @apply p-2 rounded-full hover:bg-blue-100 opacity-75 cursor-pointer transition-all duration-100;
+  }
+}
+
