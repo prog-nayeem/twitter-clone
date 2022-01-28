@@ -2,7 +2,7 @@ import { getProviders, getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Feed from '../components/feed/Feed';
 import Sidebar from '../components/leftSidebar/Sidebar';
-import Signin from '../components/signin';
+import Signin from '../components/Signin';
 import RightSide from '../components/rightSidebar/RightSide';
 
 export default function Home({ providers, tranding, follow }) {
