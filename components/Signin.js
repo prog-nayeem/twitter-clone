@@ -2,7 +2,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-const Signin = ({ providers }) => {
+const SignInComponent = ({ providers }) => {
   const { data: session } = useSession();
 
   const router = useRouter();
@@ -26,4 +26,4 @@ const Signin = ({ providers }) => {
   );
 };
 
-export default Signin;
+export default SignInComponent;
