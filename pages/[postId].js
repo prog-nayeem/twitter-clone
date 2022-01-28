@@ -17,7 +17,7 @@ import SingelPost from '../components/feed/SingelPost';
 import CommentChild from '../components/feed/comment/CommentChild';
 import RightSide from '../components/rightSidebar/RightSide';
 
-export default function commentPage({ providers, tranding, follow }) {
+export default function PostIdPage({ providers, tranding, follow }) {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState([]);
   const { data: session } = useSession();
