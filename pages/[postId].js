@@ -1,7 +1,7 @@
 import { getProviders, getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Sidebar from '../components/leftSidebar/Sidebar';
-import Signin from '../components/signin';
+import Signin from '../components/Signin';
 import { db } from '../firebase';
 import { useEffect, useState } from 'react';
 import {
