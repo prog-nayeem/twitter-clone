@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $HOST",
+    "start": "next start -p $PORT",
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
