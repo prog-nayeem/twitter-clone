@@ -7,7 +7,10 @@ import RightSide from '../components/rightSidebar/RightSide';
 
 export default function Home({ providers, tranding, follow }) {
   const { data: session } = useSession();
-  if (!session) return <Signin providers={providers} />;
+  useEffect(()=>{
+  if (!session) return <Signin providers={providers} />
+  },[session])
+  
   return (
     <div>
       <Head>
