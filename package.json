@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p $HOST",
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "@badrap/bar-of-progress": "^0.1.2",
