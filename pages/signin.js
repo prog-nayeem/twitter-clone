@@ -1,8 +1,17 @@
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { getProviders, getSession, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const SignInComponent = ({ providers }) => {
+  const {data:session} = useSession()
+  const route = useRouter()
+  
+    useEffect(() => {
+    if (!session) return;
+    route.push("/");
+  }, [session, route]);
+  
   return (
     <>
       <div className="grid place-content-center h-screen -mt-28 space-y-8">
