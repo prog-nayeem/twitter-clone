@@ -1,37 +1,34 @@
-import { getProviders, getSession, useSession } from 'next-auth/react';
-import Head from 'next/head';
-import Sidebar from '../components/leftSidebar/Sidebar';
-import Signin from '../components/Signin';
-import { db } from '../firebase';
-import { useEffect, useState } from 'react';
+import { getProviders, getSession, useSession } from "next-auth/react";
+import Head from "next/head";
+import Sidebar from "../components/leftSidebar/Sidebar";
+import Signin from "../components/Signin";
+import { db } from "../firebase";
+import { useEffect, useState } from "react";
 import {
   collection,
   doc,
   onSnapshot,
   orderBy,
   query,
-} from '@firebase/firestore';
-import { useRouter } from 'next/router';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import SingelPost from '../components/feed/SingelPost';
-import CommentChild from '../components/feed/comment/CommentChild';
-import RightSide from '../components/rightSidebar/RightSide';
+} from "@firebase/firestore";
+import { useRouter } from "next/router";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import SingelPost from "../components/feed/SingelPost";
+import CommentChild from "../components/feed/comment/CommentChild";
+import RightSide from "../components/rightSidebar/RightSide";
 
-export default function PostIdPage({ providers, tranding, follow }) {
+export default function PostIdPage({ tranding, follow }) {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState([]);
   const { data: session } = useSession();
   const router = useRouter();
-  if (!session) return <Signin providers={providers} />;
   const { postId } = router.query;
 
-  console.log('get the single post ', post);
-  console.log('get the comment in my database ', comments);
   // single post featching
-  if (!post) return router.replace('/');
+  if (!post) return router.push("/");
   useEffect(
     () =>
-      onSnapshot(doc(db, 'post', postId), (snaphshot) => {
+      onSnapshot(doc(db, "post", postId), (snaphshot) => {
         setPost(snaphshot.data());
       }),
     [db, postId]
@@ -43,8 +40,8 @@ export default function PostIdPage({ providers, tranding, follow }) {
     () =>
       onSnapshot(
         query(
-          collection(db, 'post', postId, 'comments'),
-          orderBy('timestamp', 'desc')
+          collection(db, "post", postId, "comments"),
+          orderBy("timestamp", "desc")
         ),
         (snaphshot) => {
           setComments(snaphshot.docs);
@@ -63,7 +60,7 @@ export default function PostIdPage({ providers, tranding, follow }) {
         <Sidebar />
         <div className="flex-grow min-h-screen border-gray-100 max-w-2xl border-2">
           <div className="px-2 flex items-center space-x-5 h-14 sticky -top-0 bg-white border-gray-50 z-40 border-b-2">
-            <span onClick={() => router.push('/')} className="icon">
+            <span onClick={() => router.push("/")} className="icon">
               <ArrowBackIcon />
             </span>
             <h2 className="font-semibold text-xl cursor-pointer">Twitte</h2>
@@ -94,18 +91,14 @@ export default function PostIdPage({ providers, tranding, follow }) {
 }
 
 export async function getServerSideProps(context) {
-  const providers = await getProviders();
-  const session = await getSession(context);
-  const follow = await fetch('https://jsonkeeper.com/b/WWMJ').then((res) =>
-    res.json()
+  const follow = await fetch("https://jsonkeeper.com/b/WWMJ").then((res) =>
+    res.json().catch((err) => console.log(err.message))
   );
-  const tranding = await fetch('https://jsonkeeper.com/b/NKEV').then((res) =>
-    res.json()
+  const tranding = await fetch("https://jsonkeeper.com/b/NKEV").then((res) =>
+    res.json().catch((err) => console.log(err.message))
   );
   return {
     props: {
-      providers,
-      session,
       follow,
       tranding,
     },

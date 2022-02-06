@@ -1,15 +1,16 @@
-import { getProviders, getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import Feed from "../components/feed/Feed";
 import Sidebar from "../components/leftSidebar/Sidebar";
-import Signin from "../components/Signin";
 import RightSide from "../components/rightSidebar/RightSide";
 import { useEffect } from "react";
+import { getProviders, getSession, useSession } from "next-auth/react";
+import { useRouter } from 'next/dist/client/router';
 
-export default function Home({ providers, tranding, follow }) {
+export default function Home({ tranding, follow }) {
   const { data: session } = useSession();
+  const router = useRouter()
   useEffect(() => {
-    if (!session) return <Signin providers={providers} />;
+ if(!session) return router.push("/signin")
   }, [session]);
 
   return (
@@ -28,8 +29,6 @@ export default function Home({ providers, tranding, follow }) {
 }
 
 export async function getServerSideProps(context) {
-  const providers = await getProviders();
-  const session = await getSession(context);
   const follow = await fetch("https://jsonkeeper.com/b/WWMJ").then((res) =>
     res.json().catch((err) => console.log(err.message))
   );
@@ -38,8 +37,6 @@ export async function getServerSideProps(context) {
   );
   return {
     props: {
-      providers,
-      session,
       follow,
       tranding,
     },
