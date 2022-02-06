@@ -4,13 +4,16 @@ import Sidebar from "../components/leftSidebar/Sidebar";
 import RightSide from "../components/rightSidebar/RightSide";
 import { useEffect } from "react";
 import { getProviders, getSession, useSession } from "next-auth/react";
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from "next/dist/client/router";
 
 export default function Home({ tranding, follow }) {
   const { data: session } = useSession();
-  const router = useRouter()
+  const router = useRouter();
+
   useEffect(() => {
- if(!session) return router.push("/signin")
+    if (!session) {
+      router.push("/signin");
+    }
   }, [session]);
 
   return (
