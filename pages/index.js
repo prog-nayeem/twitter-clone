@@ -7,13 +7,13 @@ import { getProviders, getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/dist/client/router";
 
 export default function Home({ tranding, follow }) {
-  const { data: session } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (session) return;
-    router.push("/signin")
-  }, [session]);
+ const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.replace("/signin");
+    },
+  });
 
   return (
     <div>
