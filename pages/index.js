@@ -11,9 +11,8 @@ export default function Home({ tranding, follow }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
-      router.push("/signin");
-    }
+    if (session) ruturn;
+    router.push("/signin")
   }, [session]);
 
   return (
